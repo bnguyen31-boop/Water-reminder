@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hydration Shrine</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #00796b;
+      margin-bottom: 20px;
+    }
+
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    #counter {
+      margin-top: 30px;
+      font-size: 1.5em;
+      color: #004d40;
+    }
+   #reminderButton {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#reminderButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 198, 255, 0.6);
+}
+
+  </style>
+</head>
+<body>
+  <h1>💦 Technician-Core Hydration Shrine</h1>
+  <button id="reminderButton">Start Reminders</button>
+  <div id="counter">Water Breaks: 0</div>
+
+  <script>
+    let reminderInterval = null;
+    let waterBreaks = 0;
+    const button = document.getElementById("reminderButton");
+    const counter = document.getElementById("counter");
+
+    async function startReminders() {
+      if (Notification.permission !== "granted") {
+        const permission = await Notification.requestPermission();
+        if (permission !== "granted") {
+          alert("Notifications are blocked. Ritual cannot proceed.");
+          return;
+        }
+      }
+
+      reminderInterval = setInterval(() => {
+        waterBreaks++;
+        counter.textContent = `Water Breaks: ${waterBreaks}`;
+        console.log("⏰ Hydration alert triggered");
+
+        new Notification("💧 Time to hydrate!", {
+          body: `Sip #${waterBreaks} — Ritual maintenance required.`,
+        });
+      }, 60 * 60 * 1000);
+
+      button.textContent = "Stop Reminders";
+    }
+
+    function stopReminders() {
+      clearInterval(reminderInterval);
+      reminderInterval = null;
+      button.textContent = "Start Reminders";
+    }
+
+    button.addEventListener("click", () => {
+      if (reminderInterval === null) {
+        startReminders();
+      } else {
+        stopReminders();
+      }
+    });
+  </script>
+</body>
+</html>
