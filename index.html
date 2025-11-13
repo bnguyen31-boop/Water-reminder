@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hydration Reminder</title>
+</head>
+<body>
+  <h1>💦 Technician-Core Hydration Ritual</h1>
+  <button id="reminderButton">Start Reminders</button>
+
+  <script>
+    let reminderInterval = null;
+    const button = document.getElementById("reminderButton");
+
+    button.addEventListener("click", () => {
+      if (reminderInterval === null) {
+        // Request permission and start reminders only if granted
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") {
+            reminderInterval = setInterval(() => {
+              console.log("⏰ Hydration alert triggered");
+              new Notification("💧 Time to hydrate!", {
+                body: "Take a sip, technician. Ritual maintenance required.",
+              });
+            }, 2 * 1000); // every 2 seconds for testing
+
+            button.textContent = "Stop Reminders";
+          } else {
+            alert("Notifications are blocked. Ritual cannot proceed.");
+          }
+        });
+      } else {
+        // Stop reminders
+        clearInterval(reminderInterval);
+        reminderInterval = null;
+        button.textContent = "Start Reminders";
+      }
+    });
+  </script>
+</body>
+</html>
