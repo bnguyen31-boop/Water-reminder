@@ -1,4 +1,4 @@
-<script>
+<!DOCTYPE html> <html> <head> <title>Hydration Shrine</title> <style> body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(to right, #e0f7fa, #b2ebf2); text-align: center; padding: 50px; } h1 { font-size: 2.5em; color: #00796b; margin-bottom: 20px; } button { font-size: 1.2em; padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 8px; cursor: pointer; } button:hover { background-color: #004d40; } #counter { margin-top: 30px; font-size: 1.5em; color: #004d40; } #reminderButtonButton { background: linear-gradient(135deg, #00c6ff, #0072ff); color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 8px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; } #reminderButtonButton:hover { transform: scale(1.05); box-shadow: 0 0 10px rgba(0, 198, 255, 0.6); } </style> </head> <body> <h1>💦 Technician-Core Hydration Shrine</h1> <button id="reminderButton">Start Reminders</button> <div id="counter">Water Breaks: 0</div> <script>
   let reminderInterval = null;
   let waterBreaks = parseInt(localStorage.getItem("waterBreaks")) || 0;
   const button = document.getElementById("reminderButton");
@@ -11,6 +11,8 @@
     25: "🥇 Gold Hydration Badge Unlocked!",
     50: "🏆 Technician-Core Hydration Master!"
   };
+
+  const audio = new Audio("https://example.com/your-sound.mp3"); // Replace with your hosted sound file
 
   function updateCounter() {
     counter.textContent = `Water Breaks: ${waterBreaks}`;
@@ -30,6 +32,14 @@
       }
     }
 
+    const intervalMinutes = prompt("Enter reminder interval in minutes:", "60");
+    const intervalMs = parseInt(intervalMinutes) * 60 * 1000;
+
+    if (isNaN(intervalMs) || intervalMs <= 0) {
+      alert("Invalid interval. Ritual aborted.");
+      return;
+    }
+
     reminderInterval = setInterval(() => {
       waterBreaks++;
       updateCounter();
@@ -38,7 +48,9 @@
       new Notification(`${emoji} Time to hydrate!`, {
         body: `Sip #${waterBreaks} — Ritual maintenance required.`,
       });
-    }, 60 * 60 * 1000); // 1 hour
+
+      audio.play(); // Play hydration sound
+    }, intervalMs);
 
     button.textContent = "Stop Reminders";
   }
@@ -57,6 +69,6 @@
     }
   });
 
-  // Initialize counter on page load
   updateCounter();
 </script>
+</body> </html>
