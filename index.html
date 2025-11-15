@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html> <head> <title>Hydration Shrine</title> <style> body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(to right, #e0f7fa, #b2ebf2); text-align: center; padding: 50px; } h1 { font-size: 2.5em; color: #00796b; margin-bottom: 20px; } button { font-size: 1.2em; padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 8px; cursor: pointer; } button:hover { background-color: #004d40; } #counter { margin-top: 30px; font-size: 1.5em; color: #004d40; } #reminderButtonButton { background: linear-gradient(135deg, #00c6ff, #0072ff); color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 8px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; } #reminderButtonButton:hover { transform: scale(1.05); box-shadow: 0 0 10px rgba(0, 198, 255, 0.6); } </style> </head> <body> <h1>💦 Technician-Core Hydration Shrine</h1> <button id="reminderButton">Start Reminders</button> <div id="counter">Water Breaks: 0</div> <script>
+<!DOCTYPE html> <html> <head> <title>Hydration Shrine</title> <style> body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(to right, #e0f7fa, #b2ebf2); text-align: center; padding: 50px; } h1 { font-size: 2.5em; color: #00796b; margin-bottom: 20px; } button { font-size: 1.2em; padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 8px; cursor: pointer; } button:hover { background-color: #004d40; } #counter { margin-top: 30px; font-size: 1.5em; color: #004d40; } #reminderButtonButton { background: linear-gradient(135deg, #00c6ff, #0072ff); color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 8px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; } #reminderButtonButton:hover { transform: scale(1.05); box-shadow: 0 0 10px rgba(0, 198, 255, 0.6); } </style> </head> <body> <h1>💦 Hydration Shrine!</h1> <button id="reminderButton">Start Reminders</button> <div id="counter">Water Breaks: 0</div> <script>
   let reminderInterval = null;
   let waterBreaks = parseInt(localStorage.getItem("waterBreaks")) || 0;
   const button = document.getElementById("reminderButton");
@@ -9,7 +9,7 @@
     5: "🥉 Bronze Hydration Badge Unlocked!",
     10: "🥈 Silver Hydration Badge Unlocked!",
     25: "🥇 Gold Hydration Badge Unlocked!",
-    50: "🏆 Technician-Core Hydration Master!"
+    50: "🏆 Hydration Master!"
   };
 
   const audio = new Audio("https://uc39174ce03cfd2d272af6850874.dl.dropboxusercontent.com/cd/0/inline/C1Ld1sKmGY3frsTPDN9HJLJx-RyBIzh0sE5iNJCkW_ZBONQHPVr3IAj0zFC5CIHbiUPYEedi4wRGHid003U7CrIgJOVdFimnYw2ltzyiQ0XI-xl1bMozgj_xqWTRJvq6UX-IHg_vVwaH6iChuqXNpYRq/file#"); // Replace with your hosted sound file
